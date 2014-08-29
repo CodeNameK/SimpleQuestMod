@@ -1,0 +1,3 @@
+simplequest.command.sqm.usage=/sqm <spawn,info> <quest_id>
+simplequest.command.sqm.info=Quest #
+simplequest.command.permission=You need Creative Mode for using this!

@@ -1,12 +1,18 @@
 package taogunner.simplequest.server;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.Vec3;
+import net.minecraft.world.World;
 import taogunner.simplequest.entity.passive.EntityNPC;
 import taogunner.simplequest.util.json.JSONFullScript;
 import taogunner.simplequest.util.json.JSONQuery;
@@ -30,7 +36,7 @@ public class ServerCommand  implements ICommand
 	@Override
 	public String getCommandUsage(ICommandSender par1sender)
 	{
-		return "/sqm <spawn,info> <quest_id>";
+		return "/sqm <ß6spawnßr,ß6infoßr> <ß6quest_idßr>";
 	}
 
 	@Override
@@ -42,22 +48,40 @@ public class ServerCommand  implements ICommand
 	@Override
 	public void processCommand(ICommandSender par1sender, String[] par2String)
 	{
-		if (par2String.length == 2 & par1sender instanceof EntityPlayer)
+		switch (par2String.length)
 		{
-			EntityPlayer player = (EntityPlayer) par1sender;
-			try
-			{
-				String command = par2String[0];
-				int quest_id = Integer.parseInt(par2String[1]);
-				JSONFullScript json = new Gson().fromJson(new JSONQuery().JSONReadFile(quest_id), JSONFullScript.class);
-				if (command.equals("spawn")) { par1sender.getEntityWorld().spawnEntityInWorld(new EntityNPC(player, quest_id, json.npc.texture_id, json.npc.item_id, json.npc.name)); }
-				if (command.equals("info")) { par1sender.addChatMessage(new ChatComponentText("Quest #" + quest_id + " : " + json.npc.description)); }
-			}
-			catch (JsonSyntaxException e) { par1sender.addChatMessage(new ChatComponentText("File quest_" + Integer.parseInt(par2String[1]) + ".json not found or corrupted!")); }
-			catch (IOException e) { e.printStackTrace(); }
-			catch (NumberFormatException e) { par1sender.addChatMessage(new ChatComponentText(this.getCommandUsage(par1sender))); }
+			case 0:
+			default:
+				par1sender.addChatMessage(new ChatComponentText(this.getCommandUsage(par1sender)));
+				break;
+			case 1:
+				if (par2String[0].equals("remove"))
+				{
+					EntityLiving entityLiving = GetTargetEntityLiving(par1sender.getEntityWorld(), (EntityPlayer) par1sender, 3);
+					if (entityLiving != null & entityLiving instanceof EntityNPC)
+					{
+						par1sender.addChatMessage(new ChatComponentText("NPC ß6" + entityLiving.getCustomNameTag() + "ßr ·˚Î Û‰‡Î∏Ì"));
+						entityLiving.setDead();
+					}
+				}
+				break;
+			case 2:
+				if (par2String[0].equals("spawn") | par2String[0].equals("info"))
+				{
+					try
+					{
+						int quest_id = Integer.parseInt(par2String[1]);
+						JSONFullScript json = new Gson().fromJson(new JSONQuery().JSONReadFile(quest_id), JSONFullScript.class);
+						if (par2String[0].equals("spawn")) par1sender.getEntityWorld().spawnEntityInWorld(new EntityNPC((EntityPlayer) par1sender, quest_id, json.npc.texture_id, json.npc.item_id, json.npc.name));
+						if (par2String[0].equals("info")) { par1sender.addChatMessage(new ChatComponentText("Quest #" + quest_id + " : " + json.npc.description)); }
+					}
+					catch (NumberFormatException e) { par1sender.addChatMessage(new ChatComponentText(this.getCommandUsage(par1sender))); }
+					catch (JsonSyntaxException e) { par1sender.addChatMessage(new ChatComponentText("File ß6quest_" + Integer.parseInt(par2String[1]) + ".jsonßr is invalid!")); }
+					catch (FileNotFoundException e) { par1sender.addChatMessage(new ChatComponentText("File ß6quest_" + Integer.parseInt(par2String[1]) + ".jsonßr not found or corrupted!")); }
+					catch (IOException e) { e.printStackTrace(); }
+				}
+				break;
 		}
-		else { par1sender.addChatMessage(new ChatComponentText(this.getCommandUsage(par1sender))); }
 	}
 
 	@Override
@@ -87,4 +111,33 @@ public class ServerCommand  implements ICommand
 	{
 		return false;
 	}
+
+	public static EntityLiving GetTargetEntityLiving(World world, EntityPlayer player, int scanRadius)
+    {
+		double targetDistance = Math.pow(scanRadius,2);
+		EntityLiving target = null;
+		List lst = world.getEntitiesWithinAABBExcludingEntity(player, AxisAlignedBB.getBoundingBox(player.posX-scanRadius, player.posY-scanRadius, player.posZ-scanRadius, player.posX+scanRadius, player.posY+scanRadius, player.posZ+scanRadius));
+		for (int i = 0; i < lst.size(); i ++)
+		{
+			Entity ent = (Entity) lst.get(i);
+			if (ent instanceof EntityLiving && ent!=null && ent.boundingBox != null)
+			{
+				float distance = player.getDistanceToEntity(ent) + 0.1f;
+				float angle = player.rotationYawHead;
+				float pitch = player.rotationPitch;
+                Vec3 look = player.getLookVec();
+                Vec3 targetVec = Vec3.createVectorHelper(player.posX + look.xCoord * distance, player.getEyeHeight() + player.posY + look.yCoord * distance, player.posZ + look.zCoord * distance);
+
+                if (ent.boundingBox.isVecInside(targetVec))
+                {
+                	if (distance < targetDistance && distance > 0)
+                	{
+                		targetDistance = distance;
+                		target = (EntityLiving) ent;
+                	}
+                }
+			}
+        }
+        return target;
+    }
 }

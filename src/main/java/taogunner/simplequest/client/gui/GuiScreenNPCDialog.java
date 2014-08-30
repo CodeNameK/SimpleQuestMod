@@ -1,5 +1,7 @@
 package taogunner.simplequest.client.gui;
 
+import java.io.UnsupportedEncodingException;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -74,7 +76,8 @@ public class GuiScreenNPCDialog extends GuiScreen
 		GuiInventory.func_147046_a(xPosX - 20, xPosY + 65, 30, - (Mouse.getX() - this.width + 295)/6,(Mouse.getY() - this.height - 180) / 6, npc);
 		GuiInventory.func_147046_a(xPosX + 275, xPosY + 165, 30, - (Mouse.getX() - this.width - 295)/6,(Mouse.getY() - this.height) / 6, mc.thePlayer);
 
-		this.fontRendererObj.drawSplitString(this.dialog.text, xPosX + 25, xPosY + 15, 210, 0xFF00E000);
+		try { this.fontRendererObj.drawSplitString( new String(this.dialog.text.getBytes(),"UTF-8"), xPosX + 25, xPosY + 15, 210, 0xFF00E000); }
+		catch ( UnsupportedEncodingException e) { e.printStackTrace(); }
 	}
 
 	@Override
@@ -82,7 +85,11 @@ public class GuiScreenNPCDialog extends GuiScreen
 	{
 		xPosX = (this.width - this.xSize)/2;
 		xPosY = (this.height - this.ySize)/2;
-		for (JSSAnswer answer:dialog.answers) { this.buttonList.add(new GuiButtonNPCDialog(answer.jump, xPosX + 24, xPosY + 120 + this.buttonList.size()*16,210,16, answer.text)); }
+		for (JSSAnswer answer:dialog.answers)
+		{
+			try { this.buttonList.add(new GuiButtonNPCDialog(answer.jump, xPosX + 24, xPosY + 120 + this.buttonList.size()*16,210,16, new String(answer.text.getBytes(),"UTF-8"))); }
+			catch (UnsupportedEncodingException e) { e.printStackTrace(); }
+		}
 		for (int i=0; i<this.buttonList.size(); i++) { if (((GuiButtonNPCDialog)this.buttonList.get(i)).yPosition > xPosY + 210) { ((GuiButtonNPCDialog)this.buttonList.get(i)).visible = false; } }
 	}
 

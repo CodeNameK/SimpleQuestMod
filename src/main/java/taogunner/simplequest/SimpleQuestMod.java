@@ -1,7 +1,5 @@
 package taogunner.simplequest;
 
-import java.io.IOException;
-
 import taogunner.simplequest.common.CommonProxy;
 import taogunner.simplequest.server.ServerCommand;
 import cpw.mods.fml.common.Mod;
@@ -24,7 +22,7 @@ public class SimpleQuestMod
 	public static CommonProxy proxy;
 	
 	@EventHandler
-	public void preInit(FMLPreInitializationEvent event) throws IOException
+	public void preInit(FMLPreInitializationEvent event)
 	{
 		proxy.registerEntity();
 		proxy.registerRenderer();

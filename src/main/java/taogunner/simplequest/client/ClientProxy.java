@@ -1,5 +1,8 @@
 package taogunner.simplequest.client;
 
+import java.lang.reflect.Field;
+import java.nio.charset.Charset;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import taogunner.simplequest.client.gui.GuiScreenNPCDialog;
@@ -10,6 +13,14 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy extends CommonProxy
 {
+	public ClientProxy() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException
+	{
+		System.setProperty("file.encoding","UTF-8");
+		Field charset = Charset.class.getDeclaredField("defaultCharset");
+		charset.setAccessible(true);
+		charset.set(null,null);
+	}
+	
 	@Override
 	public void registerRenderer()
 	{

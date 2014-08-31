@@ -20,8 +20,8 @@ public class CommonProxy
 	private static final Map<String, NBTTagCompound> extendedEntityData = new HashMap<String, NBTTagCompound>();
 	
 	/**
-	* <p>Конструктор Proxy для Forge.</p>
-	* <p>В нем регистрируем обработчик общих событий (<b>CommonEventHandler</b>);</p>
+	* <p>РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ Proxy РґР»СЏ Forge.</p>
+	* <p>Р’ РЅРµРј СЂРµРіРёСЃС‚СЂРёСЂСѓРµРј РѕР±СЂР°Р±РѕС‚С‡РёРє РѕР±С‰РёС… СЃРѕР±С‹С‚РёР№ (<b>CommonEventHandler</b>);</p>
 	* @author TaoGunner
 	*/
 	public CommonProxy()
@@ -30,7 +30,7 @@ public class CommonProxy
 	}
 
 	/**
-	* <p>Регистрируем Entity.</p>
+	* <p>Р РµРіРёСЃС‚СЂРёСЂСѓРµРј Entity.</p>
 	* @author TaoGunner
 	 */
 	public void registerEntity()
@@ -39,15 +39,15 @@ public class CommonProxy
 	}
 
 	/**
-	 * <p>Регистрируем рендеры.</p>
-	 * <p>В общем Proxy метод должен быть пустым; 
-	 * Метод должен быть переопределен (<b>@Override</b>) в клиентском Proxy;</p>
+	 * <p>Р РµРіРёСЃС‚СЂРёСЂСѓРµРј СЂРµРЅРґРµСЂС‹.</p>
+	 * <p>Р’ РѕР±С‰РµРј Proxy РјРµС‚РѕРґ РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РїСѓСЃС‚С‹Рј; 
+	 * РњРµС‚РѕРґ РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РїРµСЂРµРѕРїСЂРµРґРµР»РµРЅ (<b>@Override</b>) РІ РєР»РёРµРЅС‚СЃРєРѕРј Proxy;</p>
 	 * @author TaoGunner
 	 */
 	public void registerRenderer() {}
 	
 	/**
-	 * <p>Регистрируем сетевые пакеты.</p>
+	 * <p>Р РµРіРёСЃС‚СЂРёСЂСѓРµРј СЃРµС‚РµРІС‹Рµ РїР°РєРµС‚С‹.</p>
 	 * @author TaoGunner
 	 */
 	public void registerPackets()

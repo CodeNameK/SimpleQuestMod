@@ -39,12 +39,12 @@ public class JSONServerSide
 	{
 		/**
 		 * ===============================================
-		 * Если есть какие-то действия, то обрабатываем их.
+		 * Р•СЃР»Рё РµСЃС‚СЊ РєР°РєРёРµ-С‚Рѕ РґРµР№СЃС‚РІРёСЏ, С‚Рѕ РѕР±СЂР°Р±Р°С‚С‹РІР°РµРј РёС….
 		 */
 		if (JFS.dialogs[quest_pos].actions != null)
 		{
 			/**
-			 * Добавление\удаление предметов
+			 * Р”РѕР±Р°РІР»РµРЅРёРµ\СѓРґР°Р»РµРЅРёРµ РїСЂРµРґРјРµС‚РѕРІ
 			 */
 			if (JFS.dialogs[quest_pos].actions.item != null)
 			{
@@ -53,27 +53,27 @@ public class JSONServerSide
 					if (item.value > 0)
 					{
 						player.inventory.addItemStackToInventory(new ItemStack(Item.getItemById(item.item_id), item.value));
-						player.addChatMessage(new ChatComponentText(EnumChatFormatting.ITALIC + "Получено " + item.value + " " + Item.getItemById(item.item_id).getUnlocalizedName().substring(5)));
+						player.addChatMessage(new ChatComponentText(EnumChatFormatting.ITALIC + "РџРѕР»СѓС‡РµРЅРѕ " + item.value + " " + Item.getItemById(item.item_id).getUnlocalizedName().substring(5)));
 					}
 					if (item.value < 0)
 					{
 						for (int i=0; i>item.value; i--) { player.inventory.consumeInventoryItem(Item.getItemById(item.item_id)); }
-						player.addChatMessage(new ChatComponentText(EnumChatFormatting.ITALIC + "Отдано " + Math.abs(item.value) + " " + Item.getItemById(item.item_id).getUnlocalizedName().substring(5)));
+						player.addChatMessage(new ChatComponentText(EnumChatFormatting.ITALIC + "РћС‚РґР°РЅРѕ " + Math.abs(item.value) + " " + Item.getItemById(item.item_id).getUnlocalizedName().substring(5)));
 					}
 				}
 			}
 			
 			/**
-			 * Увеличение\уменьшение параметров игрока
+			 * РЈРІРµР»РёС‡РµРЅРёРµ\СѓРјРµРЅСЊС€РµРЅРёРµ РїР°СЂР°РјРµС‚СЂРѕРІ РёРіСЂРѕРєР°
 			 */
 			if (JFS.dialogs[quest_pos].actions.param != null)
 			{
 				for (JFSAParam param: JFS.dialogs[quest_pos].actions.param)
 				{
 					/**
-					 * 1 - Здоровье
-					 * 2 - Голод
-					 * 3 - Опыт
+					 * 1 - Р—РґРѕСЂРѕРІСЊРµ
+					 * 2 - Р“РѕР»РѕРґ
+					 * 3 - РћРїС‹С‚
 					 */
 					switch (param.param_id)
 					{
@@ -83,15 +83,15 @@ public class JSONServerSide
 						case 2: player.getFoodStats().addStats(param.value, param.value); break;
 						case 3:
 							player.addExperience(param.value);
-							if (param.value > 0) player.addChatMessage(new ChatComponentText(EnumChatFormatting.ITALIC + "Получено " + param.value + " очков опыта"));
-							else player.addChatMessage(new ChatComponentText(EnumChatFormatting.ITALIC + "Потеряно " + param.value + " очков опыта"));
+							if (param.value > 0) player.addChatMessage(new ChatComponentText(EnumChatFormatting.ITALIC + "РџРѕР»СѓС‡РµРЅРѕ " + param.value + " РѕС‡РєРѕРІ РѕРїС‹С‚Р°"));
+							else player.addChatMessage(new ChatComponentText(EnumChatFormatting.ITALIC + "РџРѕС‚РµСЂСЏРЅРѕ " + param.value + " РѕС‡РєРѕРІ РѕРїС‹С‚Р°"));
 							break;
 					}
 				}
 			}
 
 			/**
-			 * Изменение состояний квестов
+			 * РР·РјРµРЅРµРЅРёРµ СЃРѕСЃС‚РѕСЏРЅРёР№ РєРІРµСЃС‚РѕРІ
 			 */
 			if (JFS.dialogs[quest_pos].actions.quest != null)
 			{
@@ -102,16 +102,16 @@ public class JSONServerSide
 			}
 
 			/**
-			 * Обработка телепортации
+			 * РћР±СЂР°Р±РѕС‚РєР° С‚РµР»РµРїРѕСЂС‚Р°С†РёРё
 			 */
 			if (JFS.dialogs[quest_pos].actions.teleport != null)
 			{
 				player.setPositionAndUpdate(JFS.dialogs[quest_pos].actions.teleport.x, JFS.dialogs[quest_pos].actions.teleport.y, JFS.dialogs[quest_pos].actions.teleport.z);
-				player.addChatMessage(new ChatComponentText(EnumChatFormatting.ITALIC + "Вы телепортированы"));
+				player.addChatMessage(new ChatComponentText(EnumChatFormatting.ITALIC + "Р’С‹ С‚РµР»РµРїРѕСЂС‚РёСЂРѕРІР°РЅС‹"));
 			}
 
 			/**
-			 * Обработка штампа времени
+			 * РћР±СЂР°Р±РѕС‚РєР° С€С‚Р°РјРїР° РІСЂРµРјРµРЅРё
 			 */
 			if (JFS.dialogs[quest_pos].actions.timestamp != null)
 			{
@@ -119,7 +119,7 @@ public class JSONServerSide
 			}
 			
 			/**
-			 * Обработка сообщения для игрока
+			 * РћР±СЂР°Р±РѕС‚РєР° СЃРѕРѕР±С‰РµРЅРёСЏ РґР»СЏ РёРіСЂРѕРєР°
 			 */
 			if (JFS.dialogs[quest_pos].actions.message != null)
 			{
@@ -128,7 +128,7 @@ public class JSONServerSide
 		}
 		
 		/**
-		 * Формируем серверную часть
+		 * Р¤РѕСЂРјРёСЂСѓРµРј СЃРµСЂРІРµСЂРЅСѓСЋ С‡Р°СЃС‚СЊ
 		 */
 		this.npc = JFS.npc;
 		this.text = JFS.dialogs[quest_pos].text;
@@ -136,14 +136,14 @@ public class JSONServerSide
 		{
 			/**
 			 * ==================================
-			 * Обработка условий появления ответа
+			 * РћР±СЂР°Р±РѕС‚РєР° СѓСЃР»РѕРІРёР№ РїРѕСЏРІР»РµРЅРёСЏ РѕС‚РІРµС‚Р°
 			 */
 			if (answer.conditions != null)
 			{
 				boolean addAnswer = true;
 				
 				/**
-				 * Проверка инвентаря на необходимые предметы
+				 * РџСЂРѕРІРµСЂРєР° РёРЅРІРµРЅС‚Р°СЂСЏ РЅР° РЅРµРѕР±С…РѕРґРёРјС‹Рµ РїСЂРµРґРјРµС‚С‹
 				 */
 				if (answer.conditions.item != null)
 				{
@@ -155,7 +155,7 @@ public class JSONServerSide
 				}
 
 				/**
-				 * Проверка на параметры игрока
+				 * РџСЂРѕРІРµСЂРєР° РЅР° РїР°СЂР°РјРµС‚СЂС‹ РёРіСЂРѕРєР°
 				 */
 				if (answer.conditions.param != null)
 				{
@@ -181,7 +181,7 @@ public class JSONServerSide
 				}
 
 				/**
-				 * Проверка на состояние квестов
+				 * РџСЂРѕРІРµСЂРєР° РЅР° СЃРѕСЃС‚РѕСЏРЅРёРµ РєРІРµСЃС‚РѕРІ
 				 */
 				if (answer.conditions.quest != null)
 				{
@@ -198,7 +198,7 @@ public class JSONServerSide
 				}
 
 				/**
-				 * Проверка штампа времени
+				 * РџСЂРѕРІРµСЂРєР° С€С‚Р°РјРїР° РІСЂРµРјРµРЅРё
 				 */
 				if (answer.conditions.timestamp != null)
 				{

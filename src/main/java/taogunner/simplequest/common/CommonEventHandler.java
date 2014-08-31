@@ -10,8 +10,8 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 public class CommonEventHandler
 {
 	/**
-	* <p>Событие при создании Entity.</p>
-	* <p>Если Entity - это игрок (<b>EntityPlayer</b>), то добавляем ему NBT-параметры;</p>
+	* <p>РЎРѕР±С‹С‚РёРµ РїСЂРё СЃРѕР·РґР°РЅРёРё Entity.</p>
+	* <p>Р•СЃР»Рё Entity - СЌС‚Рѕ РёРіСЂРѕРє (<b>EntityPlayer</b>), С‚Рѕ РґРѕР±Р°РІР»СЏРµРј РµРјСѓ NBT-РїР°СЂР°РјРµС‚СЂС‹;</p>
 	* @author TaoGunner
 	*/
 	@SubscribeEvent
@@ -24,8 +24,8 @@ public class CommonEventHandler
 	}
 
 	/**
-	* <p>Событие при появлении Entity в мире.</p>
-	* <p>Если Entity - это игрок (<b>EntityPlayer</b>), то загружаем в него NBT-параметры;</p>
+	* <p>РЎРѕР±С‹С‚РёРµ РїСЂРё РїРѕСЏРІР»РµРЅРёРё Entity РІ РјРёСЂРµ.</p>
+	* <p>Р•СЃР»Рё Entity - СЌС‚Рѕ РёРіСЂРѕРє (<b>EntityPlayer</b>), С‚Рѕ Р·Р°РіСЂСѓР¶Р°РµРј РІ РЅРµРіРѕ NBT-РїР°СЂР°РјРµС‚СЂС‹;</p>
 	* @author TaoGunner
 	*/
 	@SubscribeEvent
@@ -38,8 +38,8 @@ public class CommonEventHandler
 	}
 
 	/**
-	* <p>Событие при смерти Entity.</p>
-	* <p>Если Entity - это игрок (<b>EntityPlayer</b>), то сохраняем его NBT-параметры;</p>
+	* <p>РЎРѕР±С‹С‚РёРµ РїСЂРё СЃРјРµСЂС‚Рё Entity.</p>
+	* <p>Р•СЃР»Рё Entity - СЌС‚Рѕ РёРіСЂРѕРє (<b>EntityPlayer</b>), С‚Рѕ СЃРѕС…СЂР°РЅСЏРµРј РµРіРѕ NBT-РїР°СЂР°РјРµС‚СЂС‹;</p>
 	* @author TaoGunner
 	*/
 	@SubscribeEvent

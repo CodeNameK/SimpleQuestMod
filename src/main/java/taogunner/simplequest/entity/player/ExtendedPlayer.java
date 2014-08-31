@@ -14,10 +14,10 @@ public class ExtendedPlayer implements IExtendedEntityProperties
 	public int quest_timestamp[];
 
 	/**
-	 * <p>Конструктор дополнительных параметров NBT игрока.</p>
-	 * <p><b>quest_position</b> определяет, с какой позиции начинать квест;<br>
-	 * <b>quest_timestamp</b> определяет временную метку для квестов на время;</p>
-	 * @param player - Entity игрока
+	 * <p>РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹С… РїР°СЂР°РјРµС‚СЂРѕРІ NBT РёРіСЂРѕРєР°.</p>
+	 * <p><b>quest_position</b> РѕРїСЂРµРґРµР»СЏРµС‚, СЃ РєР°РєРѕР№ РїРѕР·РёС†РёРё РЅР°С‡РёРЅР°С‚СЊ РєРІРµСЃС‚;<br>
+	 * <b>quest_timestamp</b> РѕРїСЂРµРґРµР»СЏРµС‚ РІСЂРµРјРµРЅРЅСѓСЋ РјРµС‚РєСѓ РґР»СЏ РєРІРµСЃС‚РѕРІ РЅР° РІСЂРµРјСЏ;</p>
+	 * @param player - Entity РёРіСЂРѕРєР°
 	 * @author TaoGunner
 	 */
 	public ExtendedPlayer(EntityPlayer player)

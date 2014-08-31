@@ -20,7 +20,7 @@ import taogunner.simplequest.util.json.JSONQuery;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
-public class ServerCommand  implements ICommand
+public class ServerCommand implements ICommand
 {
 	@Override
 	public int compareTo(Object arg0)
@@ -36,7 +36,7 @@ public class ServerCommand  implements ICommand
 	@Override
 	public String getCommandUsage(ICommandSender par1sender)
 	{
-		return "/sqm <§6spawn§r,§6info§r> <§6quest_id§r>";
+		return "/sqm <Â§6spawnÂ§r,Â§6infoÂ§r> <Â§6quest_idÂ§r>";
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class ServerCommand  implements ICommand
 					EntityLiving entityLiving = GetTargetEntityLiving(par1sender.getEntityWorld(), (EntityPlayer) par1sender, 3);
 					if (entityLiving != null & entityLiving instanceof EntityNPC)
 					{
-						par1sender.addChatMessage(new ChatComponentText("NPC §6" + entityLiving.getCustomNameTag() + "§r áûë óäàë¸í"));
+						par1sender.addChatMessage(new ChatComponentText("NPC Â§6" + entityLiving.getCustomNameTag() + "Â§r Ð±Ñ‹Ð» ÑƒÐ´Ð°Ð»Ñ‘Ð½"));
 						entityLiving.setDead();
 					}
 				}
@@ -76,8 +76,8 @@ public class ServerCommand  implements ICommand
 						if (par2String[0].equals("info")) { par1sender.addChatMessage(new ChatComponentText("Quest #" + quest_id + " : " + json.npc.description)); }
 					}
 					catch (NumberFormatException e) { par1sender.addChatMessage(new ChatComponentText(this.getCommandUsage(par1sender))); }
-					catch (JsonSyntaxException e) { par1sender.addChatMessage(new ChatComponentText("File §6quest_" + Integer.parseInt(par2String[1]) + ".json§r is invalid!")); }
-					catch (FileNotFoundException e) { par1sender.addChatMessage(new ChatComponentText("File §6quest_" + Integer.parseInt(par2String[1]) + ".json§r not found or corrupted!")); }
+					catch (JsonSyntaxException e) { par1sender.addChatMessage(new ChatComponentText("File Â§6quest_" + Integer.parseInt(par2String[1]) + ".jsonÂ§r is invalid!")); }
+					catch (FileNotFoundException e) { par1sender.addChatMessage(new ChatComponentText("File Â§6quest_" + Integer.parseInt(par2String[1]) + ".jsonÂ§r not found or corrupted!")); }
 					catch (IOException e) { e.printStackTrace(); }
 				}
 				break;

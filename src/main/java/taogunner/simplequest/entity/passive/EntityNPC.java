@@ -67,13 +67,13 @@ public class EntityNPC extends EntityLiving
 		{
 			try
 			{
-				String stringfull = new JSONQuery().JSONReadFile(this.quest);
+				String stringfull = JSONQuery.JSONReadFile(this.quest);
 				JSONFullScript jsonfull = new Gson().fromJson(stringfull, JSONFullScript.class);
 				JSONServerSide jsonserver = new JSONServerSide(jsonfull, player, ExtendedPlayer.get(player).quest_position[this.quest]);
 				CommonProxy.INSTANCE.sendTo(new Packet01SendJSONToClient(new Gson().toJson(jsonserver)), (EntityPlayerMP) player);
 			}
-			catch (JsonSyntaxException e) { e.printStackTrace(); }
-			catch (IOException e) { e.printStackTrace(); }
+			catch (JsonSyntaxException e) {}
+			catch (IOException e) {}
 		}
 		return false;
     }

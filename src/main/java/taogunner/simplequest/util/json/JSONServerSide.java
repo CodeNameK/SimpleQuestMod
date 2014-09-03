@@ -53,12 +53,12 @@ public class JSONServerSide
 					if (item.value > 0)
 					{
 						player.inventory.addItemStackToInventory(new ItemStack(Item.getItemById(item.item_id), item.value));
-						player.addChatMessage(new ChatComponentText(EnumChatFormatting.ITALIC + "Получено " + item.value + " " + Item.getItemById(item.item_id).getUnlocalizedName().substring(5)));
+						player.addChatMessage(new ChatComponentText("§oПолучено §6" + item.value + " " + Item.getItemById(item.item_id).getUnlocalizedName().substring(5)));
 					}
 					if (item.value < 0)
 					{
 						for (int i=0; i>item.value; i--) { player.inventory.consumeInventoryItem(Item.getItemById(item.item_id)); }
-						player.addChatMessage(new ChatComponentText(EnumChatFormatting.ITALIC + "Отдано " + Math.abs(item.value) + " " + Item.getItemById(item.item_id).getUnlocalizedName().substring(5)));
+						player.addChatMessage(new ChatComponentText("§oОтдано §6" + Math.abs(item.value) + " " + Item.getItemById(item.item_id).getUnlocalizedName().substring(5)));
 					}
 				}
 			}
@@ -83,8 +83,8 @@ public class JSONServerSide
 						case 2: player.getFoodStats().addStats(param.value, param.value); break;
 						case 3:
 							player.addExperience(param.value);
-							if (param.value > 0) player.addChatMessage(new ChatComponentText(EnumChatFormatting.ITALIC + "Получено " + param.value + " очков опыта"));
-							else player.addChatMessage(new ChatComponentText(EnumChatFormatting.ITALIC + "Потеряно " + param.value + " очков опыта"));
+							if (param.value > 0) player.addChatMessage(new ChatComponentText("§oПолучено §6" + param.value + "§f очков опыта"));
+							else player.addChatMessage(new ChatComponentText("§oПотеряно §6" + param.value + "§f очков опыта"));
 							break;
 					}
 				}
@@ -107,7 +107,7 @@ public class JSONServerSide
 			if (JFS.dialogs[quest_pos].actions.teleport != null)
 			{
 				player.setPositionAndUpdate(JFS.dialogs[quest_pos].actions.teleport.x, JFS.dialogs[quest_pos].actions.teleport.y, JFS.dialogs[quest_pos].actions.teleport.z);
-				player.addChatMessage(new ChatComponentText(EnumChatFormatting.ITALIC + "Вы телепортированы"));
+				player.addChatMessage(new ChatComponentText("§oВы телепортированы"));
 			}
 
 			/**

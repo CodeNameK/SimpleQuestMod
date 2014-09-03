@@ -1,5 +1,7 @@
 package taogunner.simplequest.network;
 
+import java.io.UnsupportedEncodingException;
+
 import io.netty.buffer.ByteBuf;
 import taogunner.simplequest.client.ClientProxy;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
@@ -20,14 +22,15 @@ public class Packet01SendJSONToClient implements IMessage,IMessageHandler<Packet
 	@Override
 	public IMessage onMessage(Packet01SendJSONToClient message, MessageContext ctx)
 	{
-		ClientProxy.openGUI(1, message.jsonclient);
+		ClientProxy.OpenNpcGui(message.jsonclient);
 		return null;
 	}
 
 	@Override
 	public void fromBytes(ByteBuf buf)
 	{
-		this.jsonclient = new String(buf.readBytes(buf.readableBytes()).array());
+		try { this.jsonclient = new String(buf.readBytes(buf.readableBytes()).array(), "UTF-8"); }
+		catch (UnsupportedEncodingException e) { e.printStackTrace(); }
 	}
 
 	@Override

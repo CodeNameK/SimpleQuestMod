@@ -13,27 +13,14 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy extends CommonProxy
 {
-	public ClientProxy() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException
-	{
-		System.setProperty("file.encoding","UTF-8");
-		Field charset = Charset.class.getDeclaredField("defaultCharset");
-		charset.setAccessible(true);
-		charset.set(null,null);
-	}
-	
 	@Override
 	public void registerRenderer()
 	{
 		RenderingRegistry.registerEntityRenderingHandler(EntityNPC.class, new RenderNPC(new ModelBiped(), 0.5F));
 	}
 
-	public static void openGUI(int par1int, String jsonString)
+	public static void OpenNpcGui(String jsonString)
 	{
-		switch (par1int)
-		{
-		case 1:
-		default:
-			Minecraft.getMinecraft().displayGuiScreen(new GuiScreenNPCDialog(jsonString));
-		}
+		Minecraft.getMinecraft().displayGuiScreen(new GuiScreenNPCDialog(jsonString));
 	}
 }

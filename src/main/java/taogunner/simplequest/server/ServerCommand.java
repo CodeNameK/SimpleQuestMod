@@ -71,7 +71,7 @@ public class ServerCommand implements ICommand
 					try
 					{
 						int quest_id = Integer.parseInt(par2String[1]);
-						JSONFullScript json = new Gson().fromJson(new JSONQuery().JSONReadFile(quest_id), JSONFullScript.class);
+						JSONFullScript json = new Gson().fromJson(JSONQuery.JSONReadFile(quest_id), JSONFullScript.class);
 						if (par2String[0].equals("spawn")) par1sender.getEntityWorld().spawnEntityInWorld(new EntityNPC((EntityPlayer) par1sender, quest_id, json.npc.texture_id, json.npc.item_id, json.npc.name));
 						if (par2String[0].equals("info")) { par1sender.addChatMessage(new ChatComponentText("Quest #" + quest_id + " : " + json.npc.description)); }
 					}
@@ -112,7 +112,7 @@ public class ServerCommand implements ICommand
 		return false;
 	}
 
-	public static EntityLiving GetTargetEntityLiving(World world, EntityPlayer player, int scanRadius)
+	public EntityLiving GetTargetEntityLiving(World world, EntityPlayer player, int scanRadius)
     {
 		double targetDistance = Math.pow(scanRadius,2);
 		EntityLiving target = null;

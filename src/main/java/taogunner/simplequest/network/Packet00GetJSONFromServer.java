@@ -40,8 +40,7 @@ public class Packet00GetJSONFromServer implements IMessage,IMessageHandler<Packe
 	{
 		try
 		{
-			String stringfull = new JSONQuery().JSONReadFile(message.quest_num);
-			JSONFullScript jsonfull = new Gson().fromJson(stringfull, JSONFullScript.class);
+			JSONFullScript jsonfull = new Gson().fromJson(JSONQuery.JSONReadFile(message.quest_num), JSONFullScript.class);
 			JSONServerSide jsonserver;
 			if (message.quest_pos != -1) { jsonserver = new JSONServerSide(jsonfull, ctx.getServerHandler().playerEntity, message.quest_pos); }
 			else { jsonserver = new JSONServerSide(jsonfull, ctx.getServerHandler().playerEntity, ExtendedPlayer.get(ctx.getServerHandler().playerEntity).quest_position[message.quest_num]); }

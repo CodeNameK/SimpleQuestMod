@@ -13,7 +13,7 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 public class SimpleQuestMod
 {
 	public static final String MODID = "SimpleQuest";
-	public static final String VERSION = "22";
+	public static final String VERSION = "24";
 	
 	@Instance(MODID)
 	public static SimpleQuestMod instance;

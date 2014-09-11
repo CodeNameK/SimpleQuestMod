@@ -202,8 +202,8 @@ public class JSONServerSide
 				 */
 				if (answer.conditions.timestamp != null)
 				{
-					if ((ExtendedPlayer.get(player).quest_timestamp[npc.quest_id] >= (System.currentTimeMillis()/1000)) & (answer.conditions.timestamp.logic)) { addAnswer = false; }
-					if ((ExtendedPlayer.get(player).quest_timestamp[npc.quest_id] < (System.currentTimeMillis()/1000)) & (!answer.conditions.timestamp.logic)) { addAnswer = false; }
+					if ((System.currentTimeMillis()/1000) >= (ExtendedPlayer.get(player).quest_timestamp[npc.quest_id]) & (answer.conditions.timestamp.logic)) { addAnswer = false; }
+					if ((System.currentTimeMillis()/1000) < (ExtendedPlayer.get(player).quest_timestamp[npc.quest_id]) & (!answer.conditions.timestamp.logic)) { addAnswer = false; }
 				}
 				if (addAnswer) { answers.add( new JSSAnswer(answer.text, answer.jump)); }
 			}

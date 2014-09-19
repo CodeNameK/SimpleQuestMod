@@ -9,7 +9,7 @@ import taogunner.simplequest.entity.passive.EntityNPC;
 
 public class RenderNPC extends RenderBiped
 {
-	private static final ResourceLocation[] npcSkin = new ResourceLocation[20];
+	private static final ResourceLocation[] npcSkin = new ResourceLocation[24];
 
 	public RenderNPC(ModelBiped par1ModelBiped, float par2float)
 	{

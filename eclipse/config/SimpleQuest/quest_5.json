@@ -162,8 +162,8 @@
       "actions": {
         "teleport": {
           "x": 0,
-          "y": 0,
-          "z": 70
+          "y": 70,
+          "z": 0
         }
       },
       "answers": [
@@ -177,8 +177,8 @@
       "actions": {
         "teleport": {
           "x": 0,
-          "y": 0,
-          "z": 70
+          "y": 70,
+          "z": 0
         }
       },
       "answers": [
@@ -192,8 +192,8 @@
       "actions": {
         "teleport": {
           "x": 0,
-          "y": 0,
-          "z": 70
+          "y": 70,
+          "z": 0
         }
       },
       "answers": [
@@ -207,8 +207,8 @@
       "actions": {
         "teleport": {
           "x": 0,
-          "y": 0,
-          "z": 70
+          "y": 70,
+          "z": 0
         }
       },
       "answers": [
@@ -222,8 +222,8 @@
       "actions": {
         "teleport": {
           "x": 0,
-          "y": 0,
-          "z": 70
+          "y": 70,
+          "z": 0
         }
       },
       "answers": [
@@ -237,8 +237,8 @@
       "actions": {
         "teleport": {
           "x": 0,
-          "y": 0,
-          "z": 70
+          "y": 70,
+          "z": 0
         }
       },
       "answers": [
@@ -252,8 +252,8 @@
       "actions": {
         "teleport": {
           "x": 0,
-          "y": 0,
-          "z": 70
+          "y": 70,
+          "z": 0
         }
       },
       "answers": [
@@ -267,8 +267,8 @@
       "actions": {
         "teleport": {
           "x": 0,
-          "y": 0,
-          "z": 70
+          "y": 70,
+          "z": 0
         }
       },
       "answers": [
@@ -282,8 +282,8 @@
       "actions": {
         "teleport": {
           "x": 0,
-          "y": 0,
-          "z": 70
+          "y": 70,
+          "z": 0
         }
       },
       "answers": [
@@ -297,8 +297,8 @@
       "actions": {
         "teleport": {
           "x": 0,
-          "y": 0,
-          "z": 70
+          "y": 70,
+          "z": 0
         }
       },
       "answers": [
@@ -312,8 +312,8 @@
       "actions": {
         "teleport": {
           "x": 0,
-          "y": 0,
-          "z": 70
+          "y": 70,
+          "z": 0
         }
       },
       "answers": [

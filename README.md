@@ -1,13 +1,14 @@
 SimpleQuestMod
 ==============
 
-SimpleQuestMod v0.3
-
-Для проверки квеста положите в файл quest_2.json в папку ./config/SimpleQuest/
-Если мод не найдёт эту папку - он создаст её автоматически.
+SimpleQuestMod v0.4
 
 Доступные команды:
- /sqm info <id> - вывод краткого описания NPC;
- /sqm spawn <id> - спавн NPC с определенным номером;
- 
+ /sqm info <id> - вывод в чат краткого описания NPC;
+ /sqm spawn <id> - создаёт NPC с заданным номером на месте игрока;
+ /sqm remove - удаляет NPC. Команда выполнится при наведении.
+
+Для проверки квеста положите файл quest_2.json в папку ./config/SimpleQuest/
 В комплекте идёт файл quest_2.json -> его вызываем командой /sqm spawn 2
+
+Skype: TaoGunner

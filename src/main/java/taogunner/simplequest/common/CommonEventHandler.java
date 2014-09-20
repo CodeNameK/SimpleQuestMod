@@ -9,11 +9,6 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class CommonEventHandler
 {
-	/**
-	* <p>Событие при создании Entity.</p>
-	* <p>Если Entity - это игрок (<b>EntityPlayer</b>), то добавляем ему NBT-параметры;</p>
-	* @author TaoGunner
-	*/
 	@SubscribeEvent
 	public void onEntityConstructing(EntityConstructing event)
 	{
@@ -23,11 +18,6 @@ public class CommonEventHandler
 		}
 	}
 
-	/**
-	* <p>Событие при появлении Entity в мире.</p>
-	* <p>Если Entity - это игрок (<b>EntityPlayer</b>), то загружаем в него NBT-параметры;</p>
-	* @author TaoGunner
-	*/
 	@SubscribeEvent
 	public void onEntityJoinWorld(EntityJoinWorldEvent event)
 	{
@@ -37,11 +27,6 @@ public class CommonEventHandler
 		}
 	}
 
-	/**
-	* <p>Событие при смерти Entity.</p>
-	* <p>Если Entity - это игрок (<b>EntityPlayer</b>), то сохраняем его NBT-параметры;</p>
-	* @author TaoGunner
-	*/
 	@SubscribeEvent
 	public void onLivingDeathEvent(LivingDeathEvent event)
 	{

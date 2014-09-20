@@ -19,37 +19,18 @@ public class CommonProxy
 	public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(SimpleQuestMod.MODID.toLowerCase());
 	private static final Map<String, NBTTagCompound> extendedEntityData = new HashMap<String, NBTTagCompound>();
 	
-	/**
-	* <p>Конструктор Proxy для Forge.</p>
-	* <p>В нем регистрируем обработчик общих событий (<b>CommonEventHandler</b>);</p>
-	* @author TaoGunner
-	*/
 	public CommonProxy()
 	{
 		MinecraftForge.EVENT_BUS.register(new CommonEventHandler());
 	}
 
-	/**
-	* <p>Регистрируем Entity.</p>
-	* @author TaoGunner
-	 */
 	public void registerEntity()
 	{
 		EntityRegistry.registerModEntity(EntityNPC.class, "NPC", 1, SimpleQuestMod.instance, 64, 1, true);
 	}
 
-	/**
-	 * <p>Регистрируем рендеры.</p>
-	 * <p>В общем Proxy метод должен быть пустым; 
-	 * Метод должен быть переопределен (<b>@Override</b>) в клиентском Proxy;</p>
-	 * @author TaoGunner
-	 */
 	public void registerRenderer() {}
-	
-	/**
-	 * <p>Регистрируем сетевые пакеты.</p>
-	 * @author TaoGunner
-	 */
+
 	public void registerPackets()
 	{
 		INSTANCE.registerMessage(Packet00GetJSONFromServer.class, Packet00GetJSONFromServer.class, 0, Side.SERVER);

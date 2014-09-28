@@ -28,7 +28,7 @@ public class JSONServerSide
 		}
 	}
 	
-	public JSONServerSide(JSONFullScript JFS, EntityPlayer player, int quest_pos)
+	public JSONServerSide(JSONFullScript JFS, EntityPlayer player, int quest_pos, int npcID)
 	{
 		/**
 		 * Здесь будет обработка событий
@@ -45,6 +45,8 @@ public class JSONServerSide
 		 * Формируем диалог для отправки
 		 */
 		this.npc = JFS.npc;
+		this.npc.quest_id = npcID;
+		ExtendedPlayer.get(player).quest_current = "" + npcID;
 		this.text = JFS.dialogs[quest_pos].text;
 		for ( JFSAnswer answer: JFS.dialogs[quest_pos].answers)
 		{
@@ -56,7 +58,11 @@ public class JSONServerSide
 					if (!CheckCondition(condition, player, JFS.npc.quest_id)) {addAnswer = false;}
 				}
 			}
-			if (addAnswer) { answers.add( new JSSAnswer(answer.text, answer.jump)); }
+			if (addAnswer)
+			{
+				answers.add( new JSSAnswer(answer.text, answer.jump));
+				ExtendedPlayer.get(player).quest_current += ":" + answer.jump;
+			}
 		}
 	}
 

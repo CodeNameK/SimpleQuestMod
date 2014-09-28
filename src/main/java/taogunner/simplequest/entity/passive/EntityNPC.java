@@ -1,31 +1,20 @@
 package taogunner.simplequest.entity.passive;
 
-import java.io.IOException;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import taogunner.simplequest.SimpleQuestMod;
-import taogunner.simplequest.common.CommonProxy;
-import taogunner.simplequest.entity.player.ExtendedPlayer;
-import taogunner.simplequest.network.Packet01SendJSONToClient;
-import taogunner.simplequest.util.json.JSONFullScript;
-import taogunner.simplequest.util.json.JSONQuery;
-import taogunner.simplequest.util.json.JSONServerSide;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
+import taogunner.simplequest.util.ServerUtils;
 
 public class EntityNPC extends EntityLiving
 {
 	private final static String EXT_PROP_NAME = SimpleQuestMod.MODID;
-	private int quest = 0;
+	public int quest = 0;
 
 	public EntityNPC(World par1World)
 	{
@@ -63,18 +52,7 @@ public class EntityNPC extends EntityLiving
 	@Override
     protected boolean interact(EntityPlayer player)
     {
-		if (!this.worldObj.isRemote)
-		{
-			try
-			{
-				String stringfull = JSONQuery.JSONReadFile(this.quest);
-				JSONFullScript jsonfull = new Gson().fromJson(stringfull, JSONFullScript.class);
-				JSONServerSide jsonserver = new JSONServerSide(jsonfull, player, ExtendedPlayer.get(player).quest_position[this.quest]);
-				CommonProxy.INSTANCE.sendTo(new Packet01SendJSONToClient(new Gson().toJson(jsonserver)), (EntityPlayerMP) player);
-			}
-			catch (JsonSyntaxException e) {}
-			catch (IOException e) {}
-		}
+		if (!this.worldObj.isRemote) { ServerUtils.getJSONQuest(player, this.getEntityId(), -1); }
 		return false;
     }
 

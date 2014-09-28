@@ -31,7 +31,7 @@ public class CommonProxy
 
 	public void registerRenderer() {}
 
-	public void registerPackets()
+	public void registerPacket()
 	{
 		INSTANCE.registerMessage(Packet00GetJSONFromServer.class, Packet00GetJSONFromServer.class, 0, Side.SERVER);
 		INSTANCE.registerMessage(Packet01SendJSONToClient.class, Packet01SendJSONToClient.class, 1, Side.CLIENT);

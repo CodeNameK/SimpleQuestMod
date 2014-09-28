@@ -1,30 +1,46 @@
 package taogunner.simplequest.util.json;
 
+import com.google.gson.annotations.Expose;
+
 public class JSONFullScript
 {
 	public JFSNPC npc;
 	JFSDialog[] dialogs;
-	
+
 	public class JFSNPC
 	{
-		public int quest_id = 0;
-		public int texture_id = 0;
-		public int item_id = 0;
-		public String name = "Simple Quest NPC";
-		public String description = "Simple Quest NPC Description";
+		public int quest_id;
+		public int texture_id;
+		public int item_id;
+		public String name;
+		public String description;
+		
+		public JFSNPC()
+		{
+			this.quest_id = 0;
+			this.texture_id = 0;
+			this.item_id = 0;
+			this.name = "Simple Quest NPC";
+			this.description = "Simple Quest NPC Description";
+		}
 	}
 	
-	class JFSDialog
+	public class JFSDialog
 	{
-		String text = "EMPTY DIALOG";
+		String text;
 		JFSAnswer[] answers;
 		String[] actions;
 		
-		class JFSAnswer
+		public class JFSAnswer
 		{
-			String text = "EMPTY ANSWER";
-			int jump = -1;
+			String text;
+			int jump;
 			String[] conditions;
+			
+			public JFSAnswer()
+			{
+				this.jump = -1;
+			}
 		}
 	}
 }

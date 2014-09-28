@@ -6,14 +6,12 @@ import java.util.List;
 
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.World;
 import taogunner.simplequest.entity.passive.EntityNPC;
+import taogunner.simplequest.entity.player.ExtendedPlayer;
+import taogunner.simplequest.util.ServerUtils;
 import taogunner.simplequest.util.json.JSONFullScript;
 import taogunner.simplequest.util.json.JSONQuery;
 
@@ -36,7 +34,7 @@ public class ServerCommand implements ICommand
 	@Override
 	public String getCommandUsage(ICommandSender par1sender)
 	{
-		return "/sqm <§6spawn§r,§6info§r> <§6quest_id§r>";
+		return "/sqm <§6spawn§r,§6info§r,§6remove§r,§6refresh§r> <§6quest_id§r>";
 	}
 
 	@Override
@@ -57,11 +55,23 @@ public class ServerCommand implements ICommand
 			case 1:
 				if (par2String[0].equals("remove"))
 				{
-					EntityLiving entityLiving = GetTargetEntityLiving(par1sender.getEntityWorld(), (EntityPlayer) par1sender, 3);
+					EntityLiving entityLiving = ServerUtils.GetTargetEntityLiving(par1sender.getEntityWorld(), (EntityPlayer) par1sender, 3);
 					if (entityLiving != null & entityLiving instanceof EntityNPC)
 					{
 						par1sender.addChatMessage(new ChatComponentText("NPC §6" + entityLiving.getCustomNameTag() + "§r был удалён"));
 						entityLiving.setDead();
+					}
+				}
+				if (par2String[0].equals("refresh"))
+				{
+					EntityLiving entityLiving = ServerUtils.GetTargetEntityLiving(par1sender.getEntityWorld(), (EntityPlayer) par1sender, 3);
+					if ((entityLiving != null & entityLiving instanceof EntityNPC) && (par1sender instanceof EntityPlayer))
+					{
+						EntityNPC npc = (EntityNPC) entityLiving;
+						EntityPlayer player = (EntityPlayer) par1sender;
+						ExtendedPlayer.get(player).quest_position[npc.quest] = 0;
+						ExtendedPlayer.get(player).quest_timestamp[npc.quest] = 0;
+						par1sender.addChatMessage(new ChatComponentText("Квест §6" + npc.quest + "§r был обнулён"));
 					}
 				}
 				break;
@@ -77,8 +87,6 @@ public class ServerCommand implements ICommand
 					}
 					catch (NumberFormatException e) { par1sender.addChatMessage(new ChatComponentText(this.getCommandUsage(par1sender))); }
 					catch (JsonSyntaxException e) { par1sender.addChatMessage(new ChatComponentText("File §6quest_" + Integer.parseInt(par2String[1]) + ".json§r is invalid!")); }
-					catch (FileNotFoundException e) { par1sender.addChatMessage(new ChatComponentText("File §6quest_" + Integer.parseInt(par2String[1]) + ".json§r not found or corrupted!")); }
-					catch (IOException e) { e.printStackTrace(); }
 				}
 				break;
 		}
@@ -111,33 +119,4 @@ public class ServerCommand implements ICommand
 	{
 		return false;
 	}
-
-	public EntityLiving GetTargetEntityLiving(World world, EntityPlayer player, int scanRadius)
-    {
-		double targetDistance = Math.pow(scanRadius,2);
-		EntityLiving target = null;
-		List lst = world.getEntitiesWithinAABBExcludingEntity(player, AxisAlignedBB.getBoundingBox(player.posX-scanRadius, player.posY-scanRadius, player.posZ-scanRadius, player.posX+scanRadius, player.posY+scanRadius, player.posZ+scanRadius));
-		for (int i = 0; i < lst.size(); i ++)
-		{
-			Entity ent = (Entity) lst.get(i);
-			if (ent instanceof EntityLiving && ent!=null && ent.boundingBox != null)
-			{
-				float distance = player.getDistanceToEntity(ent) + 0.1f;
-				float angle = player.rotationYawHead;
-				float pitch = player.rotationPitch;
-                Vec3 look = player.getLookVec();
-                Vec3 targetVec = Vec3.createVectorHelper(player.posX + look.xCoord * distance, player.getEyeHeight() + player.posY + look.yCoord * distance, player.posZ + look.zCoord * distance);
-
-                if (ent.boundingBox.isVecInside(targetVec))
-                {
-                	if (distance < targetDistance && distance > 0)
-                	{
-                		targetDistance = distance;
-                		target = (EntityLiving) ent;
-                	}
-                }
-			}
-        }
-        return target;
-    }
 }

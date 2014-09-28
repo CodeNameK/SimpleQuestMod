@@ -13,7 +13,7 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 public class SimpleQuestMod
 {
 	public static final String MODID = "SimpleQuest";
-	public static final String VERSION = "30";
+	public static final String VERSION = "1.0.0";
 	
 	@Instance(MODID)
 	public static SimpleQuestMod instance;
@@ -26,7 +26,7 @@ public class SimpleQuestMod
 	{
 		proxy.registerEntity();
 		proxy.registerRenderer();
-		proxy.registerPackets();
+		proxy.registerPacket();
 	}
 	
 	@EventHandler

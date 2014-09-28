@@ -12,11 +12,13 @@ public class ExtendedPlayer implements IExtendedEntityProperties
 	private final static String EXT_PROP_NAME = "QuestMod";
 	public int quest_position[];
 	public int quest_timestamp[];
+	public String quest_current;
 
 	public ExtendedPlayer(EntityPlayer player)
 	{
 		this.quest_position = new int[500];
 		this.quest_timestamp = new int[500];
+		this.quest_current = "";
 	}
 	
 	public static final void registerNBT(EntityPlayer player)
@@ -54,6 +56,7 @@ public class ExtendedPlayer implements IExtendedEntityProperties
 		NBTTagCompound questNBT = new NBTTagCompound();
 		questNBT.setIntArray("QuestSavePoint", this.quest_position);
 		questNBT.setIntArray("QuestTimestamp", this.quest_timestamp);
+		questNBT.setString("QuestCurrent", this.quest_current);
 		compound.setTag(EXT_PROP_NAME, questNBT);
 	}
 
@@ -63,6 +66,7 @@ public class ExtendedPlayer implements IExtendedEntityProperties
 		NBTTagCompound questNBT = (NBTTagCompound) compound.getTag(EXT_PROP_NAME);
 		this.quest_position = questNBT.getIntArray("QuestSavePoint");
 		this.quest_timestamp = questNBT.getIntArray("QuestTimestamp");
+		this.quest_current = questNBT.getString("QuestCurrent");
 	}
 
 	@Override

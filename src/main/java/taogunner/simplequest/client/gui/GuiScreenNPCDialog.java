@@ -93,7 +93,7 @@ public class GuiScreenNPCDialog extends GuiScreen
 	@Override
 	protected void actionPerformed(GuiButton button)
 	{
-		if (button.id <= 0) { Minecraft.getMinecraft().thePlayer.closeScreen(); }
-		else { CommonProxy.INSTANCE.sendToServer(new Packet00GetJSONFromServer(this.quest_num,button.id)); }
+		if (button.id == 0) { Minecraft.getMinecraft().thePlayer.closeScreen(); }
+		else { CommonProxy.INSTANCE.sendToServer(new Packet00GetJSONFromServer(this.dialog.npc.quest_id,button.id)); }
 	}
 }
